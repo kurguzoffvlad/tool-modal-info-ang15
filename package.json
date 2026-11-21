@@ -1,0 +1,12 @@
+{
+  "name": "tool-modal-info-ang15",
+  "version": "0.0.8",
+  "peerDependencies": {
+    "@angular/common": "^15.2.0",
+    "@angular/core": "^15.2.0"
+  },
+  "dependencies": {
+    "tslib": "^2.3.0"
+  },
+  "sideEffects": false
+}
