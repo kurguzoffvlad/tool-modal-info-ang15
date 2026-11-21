@@ -18,32 +18,32 @@ import { IModalInfoDialogState } from './tool-modal-info-ang15.interfaces';
  * Размещается один раз в корне приложения.
  */
 @Component({
-	selector: 'tool-modal-info-host',
+	selector: 'tool-modal-info-host-ang15',
 	template: `
-        <div
-            class="user-info-host__backdrop"
-            [class.user-info-host__backdrop--hidden]="!current"
-        >
-            <ng-container #contentHost></ng-container>
-        </div>
-    `,
-	styles: [`
-        .user-info-host__backdrop {
-            position: fixed;
-            inset: 0;
-            background: rgba(0, 0, 0, 0.5);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            z-index: 10000;
-        }
+		<div
+			class="user-info-host__backdrop"
+			[class.user-info-host__backdrop--hidden]="!current"
+		>
+			<ng-container #contentHost></ng-container>
+		</div>
+	`,
+	styles: [ `
+		.user-info-host__backdrop {
+			position: fixed;
+			inset: 0;
+			background: rgba(0, 0, 0, 0.5);
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			z-index: 10000;
+		}
 
-        .user-info-host__backdrop--hidden {
-            display: none;
-        }
-    `],
+		.user-info-host__backdrop--hidden {
+			display: none;
+		}
+	` ],
 })
-export class ToolModalInfoHostComponent implements AfterViewInit, OnDestroy {
+export class ToolModalInfoHostAng15Component implements AfterViewInit, OnDestroy {
 	/** Текущий запрос на открытие */
 	public current: IModalInfoDialogState | null = null;
 
@@ -57,7 +57,8 @@ export class ToolModalInfoHostComponent implements AfterViewInit, OnDestroy {
 	public constructor(
 		private readonly _userInfo: ToolModalInfoAng15Service,
 		private readonly _cdr: ChangeDetectorRef,
-	) {}
+	) {
+	}
 
 	public ngAfterViewInit(): void {
 		this._userInfo.dialog$
@@ -97,7 +98,7 @@ export class ToolModalInfoHostComponent implements AfterViewInit, OnDestroy {
 		const data = state.data;
 
 		if (data) {
-			for (const [key, value] of Object.entries(data)) {
+			for (const [ key, value ] of Object.entries(data)) {
 				this._contentRef.setInput(key, value);
 			}
 		}

@@ -1,10 +1,10 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from "@angular/common";
-import { ToolModalInfoHostComponent } from "./tool-modal-info-host.component";
+import { ToolModalInfoHostAng15Component } from "./tool-modal-info-host-ang15.component";
 
 @NgModule({
-  declarations: [ToolModalInfoHostComponent],
+  declarations: [ToolModalInfoHostAng15Component],
   imports: [CommonModule],
-  exports: [ToolModalInfoHostComponent]
+  exports: [ToolModalInfoHostAng15Component]
 })
 export class ToolModalInfoAng15Module { }
