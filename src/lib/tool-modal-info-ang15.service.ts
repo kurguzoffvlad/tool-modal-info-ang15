@@ -10,16 +10,27 @@ import { magenta } from 'tool-log';
  */
 @Injectable({ providedIn: 'root' })
 export class ToolModalInfoAng15Service {
-	// ReplaySubject(1) — хост получит последнее состояние даже при поздней подписке
+
+	/**
+	 * Поток состояний диалога.
+	 * `ReplaySubject(1)` — хост получит последнее состояние даже при поздней подписке.
+	 */
 	private readonly _dialog$ = new ReplaySubject<IModalInfoDialogState | null>(1);
+
+	/**
+	 * Текущее активное состояние диалога (для вызова `resolve` при закрытии).
+	 * `null`, если диалог не открыт.
+	 */
 	private _currentState: IModalInfoDialogState | null = null;
 
 	public readonly dialog$: Observable<IModalInfoDialogState | null> = this._dialog$.asObservable();
 
 	/**
-	 * Открыть компонент и дождаться результата.
-	 * @param component Класс компонента
-	 * @param data Входные данные (пробрасываются через setInput)
+	 * Открывает переданный компонент в оверлее и возвращает промис,
+	 * который разрешится результатом, переданным в `close()`.
+	 * @param component Класс компонента для отображения.
+	 * @param data Входные данные, пробрасываемые компоненту через `setInput`.
+	 * @returns Промис с результатом закрытия диалога.
 	 */
 	public open<T = ModalInfoResult>(
 		component: Type<unknown>,
@@ -41,8 +52,9 @@ export class ToolModalInfoAng15Service {
 	}
 
 	/**
-	 * Закрыть текущий компонент с результатом.
-	 * @param result Результат
+	 * Закрывает текущий диалог, разрешая ожидающий промис переданным результатом,
+	 * и отправляет в поток сигнал `null` для очистки оверлея хостом.
+	 * @param result Результат закрытия (по умолчанию `null`).
 	 */
 	public close(result: ModalInfoResult = null): void {
 		this._currentState?.resolve(result);
